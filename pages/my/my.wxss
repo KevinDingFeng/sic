@@ -1,0 +1,61 @@
+/* pages/my/my.wxss */
+.my_top{
+    display: flex;
+    flex-direction: row;
+    padding: 20rpx;
+    align-items: center;
+}
+.my_top>image{
+    width: 120rpx;
+    height: 120rpx;
+    border: solid 3px #ffb033;
+    border-radius: 32px;
+}
+.my_name{
+    font-weight: 700;
+    font-size: 40rpx;
+    margin-left: 20rpx;
+}
+/* //下半部 */
+.my_bottom{
+    margin-top: 40rpx;
+}
+.bottom_list{
+    display: flex;
+    justify-content:space-between;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30rpx;
+    padding: 20rpx 30rpx;
+    font-size: 40rpx;
+    font-weight: 700;
+}
+/* 遮盖层 */
+.fullbg {
+    position: fixed;
+    z-index: 1;
+    background: #fff;
+    transition: all 2s;
+    opacity: 0;
+    display: none;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+}
+.fullopacity {
+    opacity: 1;
+    display: block;
+}
+.bot_z{
+    z-index: 9999;
+    background-color: #000;
+}
+.my_dl{
+    position: relative;
+    top:30%;
+    text-align: center;
+    padding: 0 20rpx
+}
+.my_dl>view{
+    margin-top: 20rpx;
+}

@@ -1,0 +1,67 @@
+/* pages/my_cash/my_cash.wxss */
+.order_bg {
+    font-size: 15px;
+    background-color: #f5f5f5;
+    overflow-y: scroll;
+    color: #000;    
+}
+.cash_money{
+    padding: 30rpx;
+    background-color: #f5f5f5;
+}
+.cash_tx{
+    background-color: #fff;
+    padding: 30rpx;
+}
+.cash_ipt{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20rpx;
+}
+.cash_ipt>input{
+    border: 1px solid #ddd;
+    height: 60rpx;
+    width: 60%;
+    padding: 0 20rpx;
+}
+.cash_ipt>button{
+    width: 25%;
+    height: 64rpx;
+    line-height:1.7;
+    align-items: center;
+    border-radius:0;
+}
+.col_c24e4e{
+    color: #c24e4e;
+}
+.col_999{
+    color: #999;
+}
+.text_sty{
+    margin-top: 30rpx;
+    font-size: 14px;
+}
+.mar_sty{
+    padding: 20rpx 0;
+}
+.flex_cc{
+    display: flex;
+    justify-content: space-between;
+}
+.weui-cells:before {
+    border: none;
+}
+.weui-cells::after {
+    border: none;
+}
+.weui-cell:before {
+    border: none;
+}
+.no_list{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.ds_n{
+    display: none;
+}

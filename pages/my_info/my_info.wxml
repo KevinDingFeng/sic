@@ -1,0 +1,49 @@
+<view class="container">
+    <view class='order_bg' style='{{pageStyle}}'>
+        <!-- 个人信息 -->
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class='left_tiao'></view>
+                <view class='title_bx'>个人信息</view>
+            </view>
+            <view class="weui-cell">
+                <view class="peo_xx_left">姓 名</view>
+                <view class="weui-cell__ft peo_xx_right">
+                    <input placeholder="请输入您的姓名" class='_input' name="userName" value='{{user_name}}' data-cc='{{user_name}}' disabled/>
+                </view>
+            </view>
+             <view class="weui-cell">
+                <view class="peo_xx_left">收款账号</view>
+                <view class="weui-cell__ft peo_xx_right">
+                    <input placeholder="请输入您的收款账号" class='_input' name="user_zh" value='{{user_zh}}' data-cc='{{user_zh}}' maxlength="19" bindblur='blurZh' bindinput="inputZh"/>
+                </view>
+            </view>
+            <view class="weui-cell">
+                <view class="peo_xx_left">手机号</view>
+                <view class="weui-cell__ft peo_xx_right">
+                    <input placeholder="去绑定/修改您的手机号码" class='_input' name="user_phone" value='{{user_phone}}'  bindinput="inputPhone" bindblur='blurPhone' />
+                </view>
+            </view>
+            <view class="weui-cell {{ishide == true?'dis_hb':''}}">
+                <view class="peo_xx_left left_two">验证码</view>
+                <view class="weui-cell__ft peo_xx_right right_two">
+                    <input placeholder="请输入您的手机验证码" class='code_input' name="phone_code" value='{{phone_code}}' bindinput="inputCode" maxlength="64" bindblur='blurCode' />
+                    <button class='right_bot' type='primary' bindtap='sendCode'  disabled='{{disabled}}'>{{time}}</button>
+                </view>
+            </view>
+            <!-- <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cells__title peo_xx_left">介 绍</view>
+                <view class="weui-cells weui-cells_after-title">
+                    <view class="weui-cell">
+                        <view class="weui-cell__bd">
+                            <textarea class="weui-textarea time_data" placeholder="请输入个人介绍" style="height: 4em"  adjust-position="true"/>
+                        </view>
+                    </view>
+                </view>
+            </view> -->
+        </view>
+        <view class='page_botton'>
+            <button class="weui-btn" type="primary" bindtap='keep_user'>{{_text_}}</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,44 @@
+<view class="container" style='{{scrollstyle}}'>
+    <scroll-view class="navbar" scroll-x="true" scroll-left="{{scrollNavbarLeft}}">
+        <view class="navbar-item {{ navbarArray[item].type }} " id="{{ item }}" wx:for="{{ navbarShowIndexArray }}" catchtap="onTapNavbar" data-type="{{ navbarArray[item].code }}">
+            <view class="navbar-item-wrap">{{ navbarArray[item].name }}</view>
+        </view>
+        <view class="navbar-item visibility-hidden">
+            <view class="navbar-item-wrap">空白</view>
+        </view>
+    </scroll-view>
+    <!--<view class="navbar-arrow-down" > catchtap="showChannelSettingModal"
+        <view class="navbar-arrow-down-wrap">
+           <image class="navbar-arrow-icon" src="/images/index/icon_arrow_down.png"></image> 
+        </view>
+    </view>-->
+    <view class="loading-modal" hidden="{{ loadingModalHide }}">
+        <view class="loading-text-wrap">
+            <text class="loading-text">Loading...</text>
+        </view>
+    </view>
+    <view class=" {{isHave?'ds_n':''}}">
+        <scroll-view class="articles" hidden="{{ articlesHide }}"  >
+            <view class="article" wx:for="{{ temporaryArray }}"  wx:for-item="items" bindtap='go_details' data-cost='{{items.cost}}' data-uuid='{{items.uuid}}' data-sid = "{{items.sid}}" data-landingPage ="{{items.landingPage}}">
+                <view class="weui-media-box weui-media-box_text" >
+                    <view class="weui-media-box__title weui-media-box__title_in-text title_sty" >{{items.title}}</view>
+                    <view class="weui-media-box__desc img_list">
+                        <image src="{{items.img0?items.img0:''}}" />
+                        <image src="{{items.img1?items.img1:''}}" />
+                        <image src="{{items.img2?items.img2:''}}" />
+                    </view>
+                    <view class="weui-media-box__info" >
+                        <view class="weui-media-box__info__meta">{{items.landingPage == undefined?'':items.landingPage}}</view>
+                        <view class="weui-media-box__info__meta {{items.landingPage == undefined?'ds_n':'spread'}}">推广</view>
+                        <!-- <view class="weui-media-box__info__meta">时间</view>
+                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view> -->
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class ="no_list {{isHave?'':'ds_n'}}" style='{{pageWidth}}height:100%'>暂无信息</view>
+    <view class="posi_hb"> 
+        <image src="../../images/hb.png"></image>
+    </view>
+</view>

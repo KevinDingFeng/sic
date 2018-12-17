@@ -1,0 +1,4 @@
+<!--pages/other/other.wxml-->
+<view>
+<web-view src="https://sing.dazonghetong.com/landing_page/index.html?uuid={{uuid}}&sid={{sid}}&landingPage={{landingPage}}"></web-view>
+</view>

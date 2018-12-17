@@ -1,0 +1,90 @@
+/* pages/my_info/my_info.wxss */
+.weui-cell {
+    width: 100%;
+}
+.weui-cells:before {
+    border: none;
+}
+.weui-cells::after {
+    border: none;
+}
+.weui-cell:before {
+    border: none;
+}
+/* ****************** */
+.order_bg {
+    font-size: 15px;
+    background-color: #f5f5f5;
+    overflow-y: scroll;
+}
+.info_list{
+    padding: 0 20px;
+}
+.info_title{
+    display: flex;
+    flex-direction: row;
+}
+.left_tiao {
+    width:6rpx;
+    height: 38rpx;
+    background-color: #2e66c3;
+    margin-right: 18rpx;
+}
+.peo_xx_left {
+    width: 30%;
+    font-size: 26rpx;
+    color: #222;
+    letter-spacing: 2px;
+}
+.peo_xx_right {
+    width: 70%;
+}
+._input {
+    width: 100%;
+    font-size: 26rpx;
+}
+.sex_type{
+    color:#808080;
+    font-size:26rpx;
+}
+.time_data{
+    font-size:26rpx;
+    color: #808080;
+}
+.page_botton {
+  position:fixed; 
+  bottom:0;
+  width: 100%;
+  z-index: 5;
+}
+textarea{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10rpx;
+    width: 96%!important;
+}
+.dis_hb{
+    display: none;
+}
+.right_two{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.code_input{
+    width:50%;
+    font-size:26rpx;
+    text-align: center;
+    margin-left:17%;
+    height: 69rpx;
+}
+.left_two{
+    width: 20%;
+    
+}
+.right_bot{
+    width:33%;
+    padding: 0;
+    font-size:26rpx;
+    margin: 0;
+}

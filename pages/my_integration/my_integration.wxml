@@ -1,0 +1,18 @@
+<view class="container">
+    <view class='order_bg' style='{{pageWidth}}height:100%'>
+        <view class="zong_fen {{isHave?'ds_n':''}}">
+            <view>总积分：<text>{{total_points}}</text></view>
+        </view>
+        <view class='detail_list' wx:for="{{ points_list }}" wx:for-item="item" wx:key="**this">
+            <view class='detail_list_left'>
+                <view>{{item.source}}</view>
+                <view>{{item.date}}</view>
+            </view>
+            <view class='detail_list_right'>{{item.settled}}{{item.amount}}</view>
+        </view>
+        <view class="detail_list mar_20 {{isShow?'':'ds_n'}}" bindtap='add_pages'>
+            <view class=' tl_c'>加载更多</view>
+        </view>
+        <view class ="no_list {{isHave?'':'ds_n'}}" style='{{pageWidth}}height:100%'>暂无积分记录</view>
+    </view>
+</view>

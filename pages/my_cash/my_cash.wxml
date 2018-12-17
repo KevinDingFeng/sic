@@ -1,0 +1,23 @@
+<!--pages/my_cash/my_cash.wxml-->
+<view class="container">
+    <view class='order_bg' style='{{pageWidth}}'>
+        <view class='cash_money'>可提现金额 ￥{{z_catch}}</view>
+        <view class='cash_tx'>
+            <view class='col_c24e4e'>输入提现金额：</view>
+            <view class='cash_ipt'>
+                <input type='number' value='{{cash_q}}' placeholder='请输入提现金额' bindinput="inputCash" bindblur='blurCash'/>
+                <button type='warn' bindtap='withdraw_cash'>提现</button>
+            </view>
+            <view class='text_sty'>
+                <text class='col_999'>申请提现后，系统将在工作日的48小时内打款.</text>
+                <text class='col_999'>请确保您的<text class="col_c24e4e">基本信息</text>中已经绑定收款银行卡</text>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title text_sty mar_sty" bindtap='go_jl'>
+            <view class="weui-cell flex_cc">
+                <view>提现记录</view>
+                <view class='col_999'>＞</view>
+            </view>
+        </view>
+    </view>
+</view>

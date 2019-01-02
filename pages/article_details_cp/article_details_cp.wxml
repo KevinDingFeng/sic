@@ -1,0 +1,24 @@
+<!--pages/article_details/article_details.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
+<view class='container' style='overflow-y:scroll;width:100%;'>
+    <view style='position:fixed;bottom:0;right:0;;z-index:100000;'>
+        <canvas class="progress_bg" canvas-id="canvasProgressbg"></canvas>
+        <canvas class="progress_canvas" canvas-id="canvasProgress"></canvas>
+        <view class="progress_text" style="{{(scale<0.55)?'left:82%':'left:81%'}};{{(scale<0.55)?'top:86%':'top:87%'}};" data-cc="{{scale}}">
+            <view style="{{cc?'position:fixed;top:85%;right:6%':''}}">
+                <image src="{{progress_img}} "></image>
+                <view class='progress_info'style="{{cc?'margin-top:-10px':''}}">{{progress_txt}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 倒计时 -->
+    <scroll-view class="{{isHave?'ds_n':''}}" style="height:{{windowHeight+'px'}}"   scroll-y="true" bindscroll="scroll">
+        <view class="weui-article">
+            <view class="weui-article__h1">{{article_title}}</view>
+            <view class="weui-article__section">
+                <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+            </view>
+        </view>
+    </scroll-view>
+    <view class="no_list {{isHave?'':'ds_n'}}" style='{{pageWidth}}height:100%'>信息加载错误</view>
+</view>

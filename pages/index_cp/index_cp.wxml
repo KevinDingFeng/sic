@@ -1,0 +1,33 @@
+<view class="container" style=''>
+  <scroll-view class="navbar" scroll-x="true" scroll-left="0">
+    <view wx:for="{{navbarArray}}" wx:key="navbarArrayKey" wx:for-item="item" wx:for-index="itemIdx" id="{{itemIdx}}" catchtap="onTapNavbar" class="navbar-item {{itemIdx == navbarActiveId ? 'navbar-item-active' : ''}}">
+      <view class="navbar-item-wrap">{{item.name}}</view>
+    </view>
+  </scroll-view>
+  <block wx:if="{{!isHave}}">
+  <view>
+    <scroll-view class="articles" >
+      <view class="article" wx:for="{{temporaryArray}}" wx:for-item="item" wx:key="temporaryKey" bindtap="go_details" data-cost="{{item.cost}}" data-uuid="{{item.uuid}}" data-sid="{{item.sid}}" data-landingPage="{{item.landingPage}}">
+        <view class="weui-media-box weui-media-box_text" >
+          <view class="weui-media-box__title weui-media-box__title_in-text title_sty" >{{item.title}}</view>
+          <view class="weui-media-box__desc img_list">
+            <image src="{{item.img0}}" />
+            <image src="{{item.img1}}" />
+            <image src="{{item.img2}}" />
+          </view>
+          <view class="weui-media-box__info" >
+              <view class="weui-media-box__info__meta">{{item.landingPage}}</view>
+              <view class="weui-media-box__info__meta {{item.landingPage?'spread':'ds_n'}}">推广</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  </block>
+  <block wx:else>
+    <view class="no_list ds_n" style='{{pageWidth}}height:100%'>暂无信息</view>
+  </block>
+  <view class="posi_hb"> 
+      <image src="/images/hb.png"></image>
+  </view>
+</view>

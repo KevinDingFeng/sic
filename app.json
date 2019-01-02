@@ -1,7 +1,9 @@
 {
     "pages": [
+        "pages/index_cp/index_cp",
         "pages/index/index",
         "pages/article_details/article_details",
+        "pages/article_details_cp/article_details_cp",
         "pages/my/my",
         "pages/cash_jl/cash_jl",
         "pages/my_info/my_info",
@@ -22,7 +24,7 @@
         "backgroundColor": "#fff",
         "list": [
             {
-                "pagePath": "pages/index/index",
+                "pagePath": "pages/index_cp/index_cp",
                 "text": "首页"
             },
             {

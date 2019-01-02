@@ -1,0 +1,58 @@
+/* pages/article_details/article_details.wxss */
+
+/* 倒计时 */
+page {
+    height:auto;
+}
+
+.posi_fixed {}
+
+.progress_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress_text image {
+    width: 80rpx;
+    height: 80rpx;
+    z-index: 100000;
+}
+
+.progress_bg {
+    position: fixed;
+    top: 82%;
+    left: 73%;
+    width: 120px;
+    height: 120px;
+}
+
+.progress_canvas {
+    position: fixed;
+    top: 82%;
+    left: 73%;
+    width: 120px;
+    height: 120px;
+}
+
+.progress_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    top:87%;
+    left:82%;
+    z-index: 100000;
+}
+
+.progress_info {
+    font-size: 24rpx;
+    letter-spacing: 2rpx;
+}
+
+.progress_dot {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #fb9126;
+}

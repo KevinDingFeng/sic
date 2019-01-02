@@ -1,6 +1,6 @@
 <view class="container" style='{{scrollstyle}}'>
     <scroll-view class="navbar" scroll-x="true" scroll-left="{{scrollNavbarLeft}}">
-        <view class="navbar-item {{ navbarArray[item].type }} " id="{{ item }}" wx:for="{{ navbarShowIndexArray }}" catchtap="onTapNavbar" data-type="{{ navbarArray[item].code }}">
+        <view class="navbar-item {{ navbarArray[item].type }} " id="{{ item }}" wx:for="{{ navbarShowIndexArray }}" wx:key="navbarKey" catchtap="onTapNavbar" data-type="{{ navbarArray[item].code }}">
             <view class="navbar-item-wrap">{{ navbarArray[item].name }}</view>
         </view>
         <view class="navbar-item visibility-hidden">
@@ -19,7 +19,7 @@
     </view>
     <view class=" {{isHave?'ds_n':''}}">
         <scroll-view class="articles" hidden="{{ articlesHide }}"  >
-            <view class="article" wx:for="{{ temporaryArray }}"  wx:for-item="items" bindtap='go_details' data-cost='{{items.cost}}' data-uuid='{{items.uuid}}' data-sid = "{{items.sid}}" data-landingPage ="{{items.landingPage}}">
+            <view class="article" wx:for="{{ temporaryArray }}"  wx:for-item="items" wx:key="temporaryKey" bindtap='go_details' data-cost='{{items.cost}}' data-uuid='{{items.uuid}}' data-sid = "{{items.sid}}" data-landingPage ="{{items.landingPage}}">
                 <view class="weui-media-box weui-media-box_text" >
                     <view class="weui-media-box__title weui-media-box__title_in-text title_sty" >{{items.title}}</view>
                     <view class="weui-media-box__desc img_list">

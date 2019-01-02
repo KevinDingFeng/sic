@@ -34,12 +34,13 @@ Page({
           that.setData({
             navbarArray: _arr
           })
-          //获取完类型之后，要明确 1，是否需要使用缓存中的 num_arr 、num_reverse；2，首页显示的内容 是通过缓存获取 还是通过接口获取(==暂时实现不了，缓存内容有要求)
+          //获取完类型之后，要明确 1，是否需要使用缓存中的 num_arr,并同时更新num_reverse（该变量不能做缓存，缓存后会有问题）；2，首页显示的内容 是通过缓存获取 还是通过接口获取(==暂时实现不了，缓存内容有要求)
           let code = _arr[0].code;
-          if (app.existStorageSyncValidTime('sicNumArrExp') && app.existStorageSyncValidTime('sicNumReverseExp')){
+          if (app.existStorageSyncValidTime('sicNumArrExp')) {//&& app.existStorageSyncValidTime('sicNumReverseExp')
             var cacheNumArr = wx.getStorageSync('sicNumArr');
-            var cacheNumReverse = wx.getStorageSync('sicNumReverse');
-            that.updateNumArrAndReverse(cacheNumArr, cacheNumReverse);//更新 num_arr 和 num_reverse
+            // var cacheNumReverse = wx.getStorageSync('sicNumReverse');
+            // that.updateNumArrAndReverse(cacheNumArr, cacheNumReverse);//更新 num_arr 和 num_reverse
+            that.updateNumArrAndReverse(cacheNumArr, cacheNumArr);//更新 num_arr 和 num_reverse
           }else{
             let c_arr = {};
             for (let i = 0; i < _arr.length; i++) {
@@ -68,6 +69,7 @@ Page({
         console.log(res);
         if(successCallbackFun){
           successCallbackFun(code, res.data, funcName);//回调函数是 解析文章信息
+          wx.hideNavigationBarLoading();  //完成停止加载
         }
       }
     })
@@ -94,7 +96,7 @@ Page({
         _arr = this.setImgsUrl(_arr); //设置图片的 url
         if (funcName && (funcName == "onPullDown" || funcName == "onPullUp")){
           //如果是上拉或下拉加载，_arr 需要添加到已有数据的头部或者尾部
-          _arr = this.fullTemporaryArray(_arr, funcName);
+          _arr = this.fullTemporaryArray(_arr, funcName, code, data.data.index);
         }
         this.setData({
           temporaryArray: _arr,
@@ -111,24 +113,28 @@ Page({
   //根据 funcName 填充数据，onPullDown 填充到原有数据的头部，onPullUp 填充到原有数据的尾部
   // param1 _arr 现有数据
   // param2 funcName 用来区别方法的来源，onLoad 表示初次加载，onPullDown 表示下拉, onPullUp 表示上拉
-  fullTemporaryArray: function (_arr, funcName){
+  fullTemporaryArray: function (_arr, funcName, _code, _num){
     if (funcName && this.data.temporaryArray){
       let teamArr = this.data.temporaryArray;
       if (funcName == "onPullDown"){//下拉
         for (let i = 0; i < teamArr.length ; i ++){
           _arr.splice(_arr.length, 0, teamArr[i]);
         }
+        let _numArr = this.data.num_arr;
+        _numArr[_code] = _num;
+        this.updateNumArr(_numArr);
         wx.stopPullDownRefresh(); //停止下拉刷新
       } else if (funcName == "onPullUp"){//上拉
         for (let i = 0; i < _arr.length; i++) {
           teamArr.splice(teamArr.length, 0, _arr[i]);
         }
+        let _numArr = this.data.num_reverse;
+        _numArr[_code] = _num;
+        this.updateNumReverse(_numArr);
         _arr = teamArr;
       }
-      wx.hideNavigationBarLoading();  //完成停止加载
     }
     return _arr;
-    
   },
   //更新当前的显示数据集合
   updateTemporaryArray: function (tempArr){
@@ -162,17 +168,17 @@ Page({
       num_reverse: numReverse
     });
     wx.setStorageSync('sicNumArr', numArr);
-    wx.setStorageSync('sicNumReverse', numReverse);
+    // wx.setStorageSync('sicNumReverse', numReverse);
     app.setStorageSyncInvalidTime('sicNumArrExp', 3600000);//设置有效期
-    app.setStorageSyncInvalidTime('sicNumReverseExp', 3600000);//设置有效期
+    // app.setStorageSyncInvalidTime('sicNumReverseExp', 3600000);//设置有效期
   },
   //更新 num_reverse ，包括设置缓存
   updateNumReverse: function(numReverse){
     this.setData({
       num_reverse: numReverse
     });
-    wx.setStorageSync('sicNumReverse', numReverse);
-    app.setStorageSyncInvalidTime('sicNumReverseExp', 3600000);//设置有效期
+    // wx.setStorageSync('sicNumReverse', numReverse);
+    // app.setStorageSyncInvalidTime('sicNumReverseExp', 3600000);//设置有效期
   },
   //更新 num_arr ，包括设置缓存
   updateNumArr: function (numArr) {
@@ -198,10 +204,11 @@ Page({
   //页面相关事件处理函数--监听用户下拉动作
   onPullDownRefresh: function () {
     var _code = this.data.navbarArray[this.data.navbarActiveId].code;
-    var _numArr = this.data.num_arr;
-    _numArr[_code] = _numArr[_code] + 1;
-    this.updateNumArr(_numArr);
-    var _num = _numArr[_code];
+    // var _numArr = this.data.num_arr;
+    // _numArr[_code] = _numArr[_code] + 1;
+    // this.updateNumArr(_numArr);//应该在获取信息之后再更新
+    // var _num = _numArr[_code];
+    var _num = this.data.num_arr[_code] + 1
     wx.showNavigationBarLoading();
     // wx.startPullDownRefresh();//这个不能开启，会造成死循环
     this.getListForOnePage(_code, _num, "onPullDown", this.setListInfo);
@@ -209,15 +216,17 @@ Page({
   //页面上拉触底事件的处理函数
   onReachBottom: function () {
     var _code = this.data.navbarArray[this.data.navbarActiveId].code;
-    var _numArr = this.data.num_reverse;
-    var _index = _numArr[_code];
-    // console.log(_index);
-    if (_index && _index > 0){
-      _numArr[_code] = _numArr[_code] - 1;
-      this.updateNumReverse(_numArr);
-      var _num = _numArr[_code];
+    // var _numArr = this.data.num_reverse;
+    // var _index = _numArr[_code];
+    var _index = this.data.num_reverse[_code];
+    if (_index && _index > 1){
+      // _numArr[_code] = _numArr[_code] - 1;
+      // this.updateNumReverse(_numArr);//应该在获取信息之后再更新
+      // var _num = _numArr[_code];
+      var _num = _index - 1;
       wx.showNavigationBarLoading();
       this.getListForOnePage(_code, _num, "onPullUp", this.setListInfo);
+    }else{
     }
   },
   //点击导航的事件
@@ -233,7 +242,6 @@ Page({
   //切换导航
   switchChannel: function (code) {
     let _num = this.data.num_arr[code];//获取类型对应的起始坐标
-    // console.log(code, _num);
     this.switchTemporaryArr(code, _num);// 切换 导航对应的数据
   },
   //导航对应的数据，如果 总集合中存在数据，则不需要获取，直接展示；如果不存在说明是第一次获取，需要访问后台
